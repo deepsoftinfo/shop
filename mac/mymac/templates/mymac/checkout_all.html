@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fondof</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="text/html">
+    <meta name="author" content="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     --><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+{% load static %}
+<style>
+    body
+{
+  background-color: #e8cebf;
+  
+}
+
+.bg-dark
+{
+  background-color: #ddaf94 !important;
+}
+	h2
+		{
+			font-family: roboto;
+			letter-spacing: 2px;
+		}
+	button.btn.btn-primary.payment {
+								     
+								     margin-top: 20px;
+								    }
+	.form-inline .form-control {
+    display: inline-block;
+    width: 500px;
+    vertical-align: middle;
+    margin-top:0px;
+    
+       }
+       li.nav-item{
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom:15px;
+  }
+  .navbar-expand-lg .navbar-nav {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    font-family: roboto;
+    letter-spacing: 2px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+	color:white;
+
+}
+#footer {
+    height: 308px;
+    width: 1349px;
+    background-color:#343a40;
+    margin-top: 200px;
+}
+#footer
+       {
+        height: 308px;
+        width: 1349px;
+        background-color: black;
+        padding-right: 20px;
+       }
+       h2#link {
+    margin-top: 56px;
+    margin-left: 178px;
+    font-family: roboto;
+    letter-spacing:1px;
+    font-size: 18px;
+    color: orange;
+}
+ul.links {
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-top: 98px;
+    margin-left: -172px;
+}
+.row {
+    margin-right: 19px;
+    margin-left:-8px;
+}
+#blank_cart
+{
+	font-size: 24px;
+    font-family: roboto;
+    letter-spacing: 1px;
+    display: none;
+}
+a#checkout
+{
+	display: none;
+}
+h2 {
+    font-family: roboto;
+    letter-spacing: 1px;
+    color: blue;
+    /*margin-left:218px;*/
+}
+.h3, h3 {
+    font-size: 20px;
+    font-family: roboto;
+    margin-left: 365px;
+    letter-spacing: 1px;
+}
+div#subtotal {
+    margin-left: 897px;
+}
+div#sum {
+    margin-bottom: -35px;
+    margin-top: 20px;
+}
+.btn-primary,.btn-success
+    {
+      background-color: #ddaf94!important;
+      border-color: black!important;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mynav">
+      <a class="navbar-brand" href="/mymac/">Fondof.com</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/mymac/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mymac/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mymac/tracker/">Tracking</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Category
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">All</a>
+              <a class="dropdown-item" href="#">Men</a>
+              <a class="dropdown-item" href="#">Women</a>
+              <a class="dropdown-item" href="#">Kids</a>
+              <a class="dropdown-item" href="#">Electronics</a>
+              <a class="dropdown-item" href="#">Fashion</a>
+              <div class="dropdown-divider"></div>
+              
+            </div>
+          </li>
+          
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Hey! What Are You Looking For Today ..." aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/mymac/contact/">ContactUs<span class="sr-only">(current)</span></a>
+        </li>
+          
+
+      
+      </ul>
+            
+    </div>
+    </nav>
+
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="items">
+    
+    </div>
+  </div>
+</div>
+
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Message:</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}  
+
+
+<section class="text-gray-700 body-font" style="margin-top: -40px;">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap">
+    <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+      <div class="w-full sm:p-4 px-4 mb-6">
+        <h1 class="title-font font-medium text-xl mb-2 text-gray-900" style="font-family: roboto;font-weight: bolder;letter-spacing: 1px;margin-top: -56px;">Fill This Form to Place Your Order Now</h1>
+       
+      </div>
+      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+        <h2 class="title-font font-medium text-3xl text-gray-900" id="sum" style="font-size: 25px;"></h2>
+        <p class="leading-relaxed" style="font-family: robotol"><b>Total Items</b></p>
+      </div>
+      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2" >
+        <h2 class="title-font font-medium text-3xl text-gray-900" id="subtotal" style="font-size: 25px;"></h2>
+        <p class="leading-relaxed" style="font-family: roboto"><b>Subtotal</b></p>
+      </div>
+      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+        <h2 class="title-font font-medium text-3xl text-gray-900" style="font-size: 25px;">Active</h2>
+        <p class="leading-relaxed" style="font-family: roboto"><b>Status</b></p>
+      </div>
+      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+        <h2 class="title-font font-medium text-3xl text-gray-900" style="font-size: 25px;"><a href="" onclick="return false" data-target=".bd-example-modal-sm" data-toggle="modal">Details</a></h2>
+        <p class="leading-relaxed" style="font-family: roboto"><b>Details</b></p>
+      </div>
+    </div>
+    <div class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
+      <form action="/mymac/checkout_all/" method="post">{% csrf_token %}
+  <input type="hidden" name="itemsJson" id="itemsJson">
+
+   <input type="hidden" name="amount" id="amount" value="">
+    
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputEmail4">Name</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+
+
+    <div class="form-group col-md-4">
+      <label for="inputPassword4">Email</label>
+      <input type="email" class="form-control" id="email" name="email">
+    </div>
+  
+
+  <div class="form-group col-md-4">
+      <label for="inputPassword4">Phone Number</label>
+      <input type="tel" class="form-control" id="phone" name="phone">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="inputAddress">Address Line 1</label>
+    <input type="text" class="form-control" id="address_line_1" name="address_line_1">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address Line 2</label>
+    <input type="text" class="form-control" id="address_line_2" name="address_line_2">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="city" name="city">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputCity">State</label>
+      <input type="text" class="form-control" id="state" name="state">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip" name="zip_code">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary payment">Place Order</button>
+
+</form>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+  
+
+    <div class="container">
+  <div class="col-md-12">
+    
+<ul class="list-group" id="items">
+  <a href="/mymac/checkout/" id="checkout"><button class="btn btn-primary">CHECKOUT</button></a>
+
+  
+</ul>
+
+</div>
+</div>
+<footer class="text-gray-700 body-font" style="margin-top: 120px;background-color: #efefef!important">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap md:text-left text-center -mb-10 -mx-4">
+      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-gray-200">
+    <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
+      <div class="flex md:flex-no-wrap flex-wrap justify-center items-end md:justify-start">
+        <div class="relative sm:w-64 w-40 sm:mr-4 mr-2">
+          <label for="footer-field" class="leading-7 text-sm text-gray-600">Placeholder</label>
+          <input type="text" id="footer-field" name="footer-field" class="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        </div>
+        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Button</button>
+        <p class="text-gray-500 text-sm md:ml-6 md:mt-0 mt-2 sm:text-left text-center">Bitters chicharrones fanny pack
+          <br class="lg:block hidden">waistcoat green juice
+        </p>
+      </div>
+      <span class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
+        <a class="text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+      </span>
+    </div>
+  </div>
+  <div class="bg-gray-200">
+    <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+      <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 tailblocks —
+        <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" target="_blank" rel="noopener noreferrer">@knyttneve</a>
+      </p>
+      <span class="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-gray-500 text-sm">Enamel pin tousled raclette tacos irony</span>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
+{% block js %}
+<script>
+  
+if(localStorage.getItem('cart')==null)
+{
+  var cart={};
+}
+
+else
+{
+  cart=JSON.parse(localStorage.getItem('cart'));
+}
+if($.isEmptyObject(cart))
+{
+  document.getElementById('hide').innerHTML='<h3>Your cart is empty kindly add an product then continue !</h3>'
+  swal("Your cart is empty now ! ");
+}
+else
+{
+total=0;
+  for( var item in cart )
+  {
+    
+   
+    var qty=cart[item][0];
+    var name=cart[item][1];
+    var img=cart[item][2];
+    var price=cart[item][3];
+    var price_slicing=price.slice(3,7);
+    var subtotal_according_quantity=price_slicing*qty;
+    var pr_id=cart[item][4];
+  
+  
+    mystr=`<li class="list-group-item d-flex justify-content-between align-items-center" style="font-family:roboto;font-size15px;">
+           <b>${name}</b>
+    <span class="badge badge-primary badge-pill">Qty: ${qty} </span><b>${price}</b>${document.getElementById('checkout').innerHTML="<a href='/mymac/checkout/" + pr_id + "' class='btn btn-primary' id='checkout'>CHECKOUT</a>"}</li>` 
+
+    $('#items').append(mystr);
+    
+    
+    
+   sum=0;
+    sum=Object.keys(cart).length;
+    sum=`<b style="font-family:roboto;font-size:25px;letter-spacing:1px;margin-left:111px;color:black">${document.getElementById('sum').innerHTML=sum}</b>`
+     $('#sum').val(sum);
+
+  
+
+    total=total+subtotal_according_quantity;
+    
+  
+
+  
+
+   }
+      total=`<b style="font-family:roboto;letter-spacing:1px;color:black;margin-left:60px;">${document.getElementById('subtotal').innerHTML=total}/-</b>`
+   $('#subtotal').val(total);
+   var a=total.slice(106,110)
+   $('#amount').val(a);
+   $('#amount').val($('#subtotal').text())
+
+}
+
+
+$('#itemsJson').val(JSON.stringify(cart));
+{% if thank %}
+
+swal("Order Placed!", "Thanks For Shopping With Us And Your Order Id Is : {{id}}", "success");
+localStorage.clear();
+
+if(swal)
+{
+
+
+     $('.swal2-styled').click(function(){
+
+       document.location="/mymac";      
+     });
+ }
+  else
+  {
+    document.location="/mymac";
+  }
+
+{% endif %}
+
+</script>
+{% endblock %}

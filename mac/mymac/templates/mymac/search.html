@@ -1,0 +1,295 @@
+{% extends 'mymac/basic.html' %}
+{% block body %}
+{% load static %}
+<style>
+.col-md-3
+{
+display: inline-block;
+margin-left:-4px;
+}
+.carousel-indicators .active {
+background-color: blue;
+}
+.plus
+    {
+      margin-top:-7px!important;
+    }
+    .minus
+    {
+      margin-top:-5px!important;
+    }
+
+.col-md-3 img{
+width: 170px;
+height: 200px;
+}
+body .carousel-indicator li{
+background-color: blue;
+}
+body .carousel-indicators{
+bottom: -40px;
+}
+.carousel-indicators li {
+
+
+    background-color: #7270fc;
+}
+body .carousel-control-prev-icon,
+body .carousel-control-next-icon{
+background-color: blue;
+}
+.carousel-control-prev,
+.carousel-control-next{
+top: auto;
+bottom: auto;
+padding-top: 222px;
+margin-top:-76px;
+}
+body .no-padding{
+padding-left: 0,
+padding-right: 0;
+}
+.card-text {
+    margin-left: -20px;
+    margin-top:-6px;
+    margin-right: -118px;
+    font-family: roboto;
+  
+}
+.qv
+{
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.card {
+    float: left;
+    margin-left: 60px;
+    width: 250px;
+    height: 563px;
+    margin-bottom: 120px;
+    border: none;
+    margin-left: 4px;
+}
+.card-title {
+    margin-bottom: .75rem;
+    font-family: roboto;
+    letter-spacing: 1px;
+    font-size: 21px;
+    margin-left: 13px;
+    margin-top: -12px;
+    font-weight: bold;
+}
+</style>
+<div class="container">
+    
+    <!--Slideshow starts here -->
+    {% for product, range, nSlides in allProds %}
+    <h5 class="my-4" style="font-size: 24px;font-family: roboto">Flash Sale On {{product.0.category}} - Recommended Items</h5>
+    <div class="row">
+        <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                {% for i in range %}
+                <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+                {% endfor %}
+            </ul>
+            <div class="container carousel-inner no-padding">
+                <div class="carousel-item active">
+                    {% for i in product %}
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="card align-items-center" style="width:21rem;">
+                           <a href="/mymac/productView/{{i.id}}" title="QuickView" id="imgpr{{i.id}}" ><img src='/media/{{i.image}}' class="card-img-top"></a>
+
+
+                            <div class="card-body">
+                                <p id=idpr{{i.id}} style="display:none;">{{i.id}}</p>
+                                <h5 class="card-title" id="namepr{{i.id}}" style="font-size: 18px;max-height:50px;margin-left: -3px;">{{i.product_name|slice:"0:20"}}</h5>
+                                <p class="card-text" style="margin-left: -6px;">{{i.desc|slice:"0:30"}}</p>
+                                <h6 class="card-title" style="margin-top:4px;margin-left: 37px;" >Price: <span id="pricepr{{i.id}}">{{i.price}}</span></h6>
+                                <span id="divpr{{i.id}}" class="divpr" style="margin-left:33px;">
+                                    <button id="pr{{i.id}}" class="btn btn-primary carttt">Add To Cart</button>
+                                </span>
+                                <a href="/mymac/productView/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary cart qv">QuickView</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                </div>
+                <div class="carousel-item">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- left and right controls for the slide -->
+        <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block js %}
+<script>
+
+
+{% if msg|length != 0 %}
+alert('{{msg}}');
+window.location.href = "/mymac/"
+{% endif %}
+// Find out the cart items from localStorage
+  if(localStorage.getItem('cart')==null)
+  {
+    var cart={}
+
+
+  }
+  else
+  {
+    
+    cart=JSON.parse(localStorage.getItem('cart'));
+    update_cart(cart);
+    pop_update(cart);
+    
+    
+    
+    
+  }
+  $('.divpr').on("click","button.carttt",function(){
+    var idstr=this.id.toString();
+    
+    
+    if(cart[idstr]!=undefined)
+    {
+      qty=cart[idstr][0]+1;
+      cart[idstr]=[qty,name,img,parseInt(price),pr_id];
+      
+
+    }
+    else
+    {
+      qty=1;
+      var pr_id=Object.keys(cart);
+      slicing=pr_id.slice(2, );
+      name=document.getElementById('name'+idstr).innerHTML;
+      img=document.getElementById('img'+idstr).innerHTML;
+      price=document.getElementById('price'+idstr).innerHTML;
+      pr_id=document.getElementById('id'+idstr).innerHTML;
+      cart[idstr]=[qty,name,img,parseInt(price),pr_id];
+    
+    }
+    
+    
+    localStorage.setItem('cart',JSON.stringify(cart));
+    update_cart(cart);
+
+
+
+});
+
+// ------------------------------------------------------------------------------------
+function update_cart(cart)
+{
+    sum=0;
+    for(var item in cart)
+    {
+        sum+=cart[item][0];
+                
+        for(var aa in {{a}})
+        {
+           
+        
+            if(!$.isEmptyObject(cart) && 'pr'+{{a}}[aa] in cart)
+            {
+                
+                document.getElementById('divpr'+{{a}}[aa]).innerHTML= "<button id='minus" + {{a}}[aa] + "' class='btn btn-primary minus'>-</button> <span id='val" + {{a}}[aa] +"''>"+cart['pr'+{{a}}[aa]][0] + "</span> <button id='plus" + {{a}}[aa] + "' class='btn btn-primary plus'>+</button>";
+               
+                
+        }
+        
+      } 
+        
+        
+    }
+    
+
+                localStorage.setItem('cart',JSON.stringify(cart));
+                document.getElementById('cart').innerHTML=sum;   
+}
+
+// ------------------------------------------------------------------------------------
+
+function clear_cart()
+{
+    cart=JSON.parse(localStorage.getItem('cart'))
+    for(var item in cart)
+    {
+      document.getElementById('div'+item).innerHTML='<button type="button" id="pr{{i.id}}" class="btn btn-primary cartt">Add to Cart</button>';
+    }
+
+    localStorage.clear();
+    cart={};
+
+}
+// ------------------------------------------------------------------------------------
+function pop_update(cart)
+{
+    popstr="";
+    popstr=popstr+"";
+    var i=1;
+    for(var item in cart)
+    {
+
+      popstr=popstr+"<b>"+i+"."+"</b>";
+      popstr=popstr+cart[item][1]+','+"Qty:"+cart[item][0]+'<br>';
+      console.log(popstr)
+      i=i+1;
+    }
+    if($.isEmptyObject(cart))
+    {
+    
+    
+    }
+    else
+    {
+      popstr=popstr+"<a href='/mymac/cart/'><button class='btn btn-primary cart' id='cart'>Show Cart</button></a><button onclick='clear_cart()'id='cart_clear' class='btn btn-primary clear_cart'>Clear Cart</button>"
+      document.getElementById('toolcart').innerHTML=popstr+'<br>';
+
+    
+    }
+}
+
+// ------------------------------------------------------------------------------------
+
+$('.divpr').on("click","button.minus",function(){
+  a=this.id.slice(7, );
+  cart['pr'+a][0]=cart['pr'+a][0]-1;
+  cart['pr'+a][0]=Math.max(0,cart['pr'+a][0]);
+  document.getElementById('valpr'+a).innerHTML=cart['pr'+a][0];
+  update_cart(cart);
+  pop_update(cart)
+  location.reload()
+ 
+});
+
+// ------------------------------------------------------------------------------------
+$('.divpr').on("click","button.plus",function(){
+  a=this.id.slice(4,);
+  console.log('val'+a)
+  cart['pr'+a][0]=cart['pr'+a][0]+1;
+  document.getElementById('val'+a).innerHTML=cart['pr'+a][0];
+  update_cart(cart);
+  pop_update(cart)
+  location.reload()
+})
+
+</script>
+{% endblock %}
+
+
+
+
+
